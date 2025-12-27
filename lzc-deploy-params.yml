@@ -1,0 +1,46 @@
+params:
+  - id: proxy_access_key
+    type: string
+    name: "proxy access key"
+    description: "Secret key for authenticating client access to the proxy server"
+    default_value: ""
+    placeholder: "Enter a strong secret key (32+ characters recommended)"
+    regex: "^.{8,}$"
+    regex_message: "Access key must be at least 8 characters long"
+
+  - id: log_level
+    type: string
+    name: "log level"
+    description: "Logging level for the application (error, warn, info, debug)"
+    default_value: "warn"
+    optional: true
+    placeholder: "error, warn, info, or debug"
+
+  - id: enable_request_logs
+    type: bool
+    name: "enable request logs"
+    description: "Enable detailed request logging"
+    default_value: false
+    optional: true
+
+  - id: enable_response_logs
+    type: bool
+    name: "enable response logs"
+    description: "Enable detailed response logging"
+    default_value: false
+    optional: true
+
+locales:
+  zh:
+    proxy_access_key:
+      name: "代理访问密钥"
+      description: "用于验证客户端对代理服务器的访问权限的密钥"
+    log_level:
+      name: "日志级别"
+      description: "应用程序的日志级别 (error, warn, info, debug)"
+    enable_request_logs:
+      name: "启用请求日志"
+      description: "是否启用详细的请求日志记录"
+    enable_response_logs:
+      name: "启用响应日志"
+      description: "是否启用详细的响应日志记录"

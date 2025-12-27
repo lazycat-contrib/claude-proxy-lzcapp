@@ -1,0 +1,49 @@
+name: Claude Proxy
+package: cloud.lazycat.app.claude-proxy
+version: 2.4.5
+min_os_version: 1.3.8
+description: "High-performance Claude API proxy server with multi-upstream support, load balancing, and web management panel"
+license: MIT
+homepage: https://github.com/BenedictKing/claude-proxy
+author: BenedictKing
+
+application:
+  subdomain: claude-proxy
+  background_task: true
+  upstreams:
+    - location: /
+      backend: http://claude-proxy-app:3000/
+  public_path:
+    - /
+
+services:
+  claude-proxy-app:
+    # crpi-i19l8zl0ugidq97v.cn-hangzhou.personal.cr.aliyuncs.com/bene/claude-proxy:latest
+    image: registry.lazycat.cloud/czyt/bene/claude-proxy:2839e29df209326d
+    environment:
+      - ENV=production
+      - ENABLE_WEB_UI=true
+      - PROXY_ACCESS_KEY={{.U.proxy_access_key}}
+      - LOG_LEVEL={{.U.log_level}}
+      - ENABLE_REQUEST_LOGS={{.U.enable_request_logs}}
+      - ENABLE_RESPONSE_LOGS={{.U.enable_response_logs}}
+    binds:
+      - /lzcapp/var/config:/.config
+      - /lzcapp/var/logs:/app/logs
+
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+locales:
+  en:
+    name: "Claude Proxy"
+    description: "High-performance Claude API proxy server with multi-upstream support, load balancing, and web management panel"
+  zh:
+    name: "Claude API 代理服务器"
+    description: "高性能的 Claude API 代理服务器，支持多种上游 AI 服务提供商，提供负载均衡、多 API 密钥管理和统一入口访问"
