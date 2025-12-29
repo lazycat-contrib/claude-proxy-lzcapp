@@ -28,7 +28,7 @@ services:
       - ENABLE_REQUEST_LOGS={{.U.enable_request_logs}}
       - ENABLE_RESPONSE_LOGS={{.U.enable_response_logs}}
     binds:
-      - /lzcapp/var/config:/.config
+      - /lzcapp/var/config:/app/.config
       - /lzcapp/var/logs:/app/logs
 
     healthcheck:
