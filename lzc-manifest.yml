@@ -9,7 +9,7 @@ application:
 
 services:
   claude-proxy-app:
-    # upstream: registry.lazycat.cloud/czyt/bene/claude-proxy:e6405663e37eb742
+    # upstream: ghcr.io/benedictking/claude-proxy:latest@sha256:79dd4ebc0eb16226f55d5bf511cd4575970468f1fdfdc6c3a0088ca4717008d9
     image: registry.lazycat.cloud/czyt/bene/claude-proxy:e6405663e37eb742
     environment:
       - ENV=production

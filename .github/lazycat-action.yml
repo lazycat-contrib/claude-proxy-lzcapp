@@ -20,10 +20,10 @@ images:
   - id: claude-proxy-app
     target: service
     service: claude-proxy-app
-    source: registry.lazycat.cloud/czyt/bene/claude-proxy
+    source: ghcr.io/benedictking/claude-proxy
     channel: custom
     sort: created
-    tag_regex: '^e6405663e37eb742$'
+    tag_regex: '^latest$'
     delivery:
       mode: lazycat
 stores:
