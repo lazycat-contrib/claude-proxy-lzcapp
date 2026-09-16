@@ -1,0 +1,38 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: .lazycat-build/claude-proxy.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: claude-proxy-app
+    bump: patch
+build:
+  run_buildscript: false
+images:
+  - id: claude-proxy-app
+    target: service
+    service: claude-proxy-app
+    source: registry.lazycat.cloud/czyt/bene/claude-proxy
+    channel: custom
+    sort: created
+    tag_regex: '^e6405663e37eb742$'
+    delivery:
+      mode: lazycat
+stores:
+  official:
+    enabled: true
+    skip_if_version_exists: true
+    changelog_locales: [zh, en]
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: Claude Proxy
+    summary: "高性能的 Claude API 代理服务器，支持多种上游 AI 服务提供商，提供负载均衡、多 API 密钥管理和统一入口访问"
